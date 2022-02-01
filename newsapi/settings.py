@@ -11,16 +11,23 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os, pymysql
+import datetime
+import pymysql
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+pymysql.install_as_MySQLdb()
+load_dotenv()
+
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-)*yf^$w-1qb=5@g34e_x42nz_dh1g@2*_2mv+)_d2xgoq5pj&g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
