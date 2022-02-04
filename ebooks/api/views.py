@@ -7,13 +7,15 @@ from rest_framework import permissions
 from ebooks.api.permissions import IsAdminUserOrReadonly, IsReviewAuthorOrReadOnly
 
 from ebooks.models import Ebook, Review
+from ebooks.api.pagination import SmallSetPagination
 from ebooks.api.serializers import EbookSerializer, ReviewSerializer
 
 
 class EbookListCreateAPIView(generics.ListCreateAPIView):
-    queryset = Ebook.objects.all()
+    queryset = Ebook.objects.all().order_by("-id")
     serializer_class = EbookSerializer
     permission_classes = [IsAdminUserOrReadonly]
+    pagination_class = SmallSetPagination
 
 class EbookDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Ebook.objects.all()
