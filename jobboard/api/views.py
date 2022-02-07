@@ -2,14 +2,14 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from jobboard.models import Joboffer
+from jobboard.models import JobOffer
 from jobboard.api.serializers import JobOfferSerializer
 
 class JobBoardListCreateAPIView(APIView):
 
     def get(self, request):
-        joboffers = Joboffer.objects.all()  #filter(active=True)
-        serializer = JobOfferSerializer(joboffers, many=True)
+        job = JobOffer.objects.filter(available = True) 
+        serializer = JobOfferSerializer(job, many=True)
         return Response(serializer.data)
     
     def post(self, request):
@@ -23,24 +23,24 @@ class JobBoardListCreateAPIView(APIView):
 class JobBoardDetailAPIView(APIView):
         
     def get_object(self, pk):
-        joboffer = get_object_or_404(Joboffer, pk=pk)
+        joboffer = get_object_or_404(JobOffer, pk=pk)
         return joboffer
     
     def get(self, request, pk):
-        joboffer = self.get_object(pk)
-        serializer = JobOfferSerializer(joboffer)
+        job = self.get_object(pk)
+        serializer = JobOfferSerializer(job)
         return Response(serializer.data)
     
     def put(self, request, pk):
-        joboffer = self.get_object(pk)
-        serializer = JobOfferSerializer(joboffer, data=request.data)
+        job = self.get_object(pk)
+        serializer = JobOfferSerializer(job, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
-        joboffer = self.get_object(pk)
-        joboffer.delete()
+        job = self.get_object(pk)
+        job.delete()
         return Response(status=status.HTTP_204_NO_CONTENT) 
         

@@ -1,4 +1,4 @@
 from django.contrib import admin
-from jobboard.models import Joboffer
+from jobboard.models import JobOffer
 
-admin.site.register(Joboffer)
+admin.site.register(JobOffer)
