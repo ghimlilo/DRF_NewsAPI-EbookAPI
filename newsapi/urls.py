@@ -20,5 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include("rest_framework.urls")),
     path("api/", include("news.api.urls")),
-    path("", include("ebooks.api.urls"))
+    path("", include("ebooks.api.urls")),
+    path("jobboard", include("jobboard.api.urls"))
 ]
