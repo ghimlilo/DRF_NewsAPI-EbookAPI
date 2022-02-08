@@ -21,5 +21,6 @@ urlpatterns = [
     path('api-auth/', include("rest_framework.urls")),
     path("api/", include("news.api.urls")),
     path("", include("ebooks.api.urls")),
-    path("jobboard", include("jobboard.api.urls"))
+    path("jobboard", include("jobboard.api.urls")),
+    path("quotes", include("quotes.api.urls"))
 ]
